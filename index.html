@@ -1,59 +1,1481 @@
-<!DOCTYPE HTML>
-<!--
-	Eventually template customized for ArabSky
-	Original by HTML5 UP | html5up.net
--->
-<html>
-	<head>
-		<title>Dhaqira – Coming Soon</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="icon" type="image/png" href="images/favicon.png" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dhaqira.ai – Talk to the Greatest Minds</title>
+<meta name="description" content="Dhaqira builds AI-powered digital twins of Arab thinkers, leaders and scholars — letting you have real voice conversations with history's greatest minds."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1B2B4B;
+  --navy-deep:#0D1829;
+  --navy-mid:#243355;
+  --sand:#E8DCC8;
+  --sand-light:#F2EBD9;
+  --sand-pale:#FAF6EE;
+  --orange:#E87422;
+  --orange-light:#F59042;
+  --white:#FFFFFF;
+  --text-dark:#1B2B4B;
+  --text-mid:#3D4F6E;
+  --text-muted:#7A8AA8;
+  --border-light:rgba(27,43,75,0.12);
+  --border-sand:rgba(232,220,200,0.3);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--sand-pale);
+  color:var(--text-dark);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Dhaqira.ai</h1>
-				<p>AI-powered digital memory platform preserving Arab intellectual legacy.</p>
-			</header>
+/* ── ARABIC TEXTURE ── */
+.arabic-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+.arabic-bg::before{
+  content:'◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎ ◎';
+  position:absolute;
+  top:-20px; left:-20px; right:-20px; bottom:-20px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:3.5rem;
+  line-height:1.4;
+  color:var(--sand);
+  opacity:0.25;
+  letter-spacing:1.5rem;
+  transform:rotate(-8deg);
+}
 
-		<!-- Signup Form -->
-			<form id="signup-form" method="POST" action="https://formsubmit.co/info@mahalli.net" target="hidden_iframe" onsubmit="showThankYou()">
-  <input type="email" name="email" placeholder="Enter your email to join the waitlist" required />
-  <input type="hidden" name="_captcha" value="false">
-  <input type="submit" value="Notify Me" />
-</form>
+/* ── NAV ── */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 5vw;
+  background:rgba(13,24,41,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(232,220,200,0.1);
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-spiral{
+  width:36px;height:36px;
+  border:2px solid var(--sand);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.nav-logo-spiral::after{
+  content:'◎';
+  color:var(--sand);
+  font-size:20px;
+  line-height:1;
+}
+.nav-wordmark{
+  font-family:'Cairo',sans-serif;
+  font-size:1.4rem;
+  color:var(--sand);
+  font-weight:600;
+  letter-spacing:0.01em;
+}
+.nav-wordmark span{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.75rem;
+  color:var(--orange);
+  font-weight:600;
+  letter-spacing:0.05em;
+  margin-left:2px;
+  vertical-align:super;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2rem;list-style:none;
+}
+.nav-links a{
+  text-decoration:none;color:rgba(232,220,200,0.7);
+  font-size:0.82rem;font-weight:500;
+  letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--sand)}
+.nav-cta{
+  background:var(--orange);
+  color:var(--white)!important;
+  padding:0.5rem 1.2rem;
+  border-radius:4px;
+  transition:background 0.2s!important;
+}
+.nav-cta:hover{background:var(--orange-light)!important}
 
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  background:var(--navy-deep) url('img/hero-bg.jpg') center/cover no-repeat;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:4rem;
+  padding:9rem 8vw 6rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-left{position:relative;z-index:2}
+#hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,24,41,0.88) 45%,rgba(13,24,41,0.35) 100%);z-index:1;pointer-events:none;}
+.hero-left,.hero-right{position:relative;z-index:2}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(232,220,200,0.2);
+  background:rgba(232,220,200,0.06);
+  color:var(--sand);
+  font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.4rem 1rem;border-radius:100px;
+  margin-bottom:1.8rem;
+}
+.eyebrow-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--orange);
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-title{
+  font-family:'Cairo',sans-serif;
+  font-size:clamp(3rem,5.5vw,5rem);
+  font-weight:700;
+  line-height:1.1;
+  color:var(--sand);
+  margin-bottom:0.5rem;
+  direction:rtl;
+}
+.hero-title-en{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(1.6rem,2.8vw,2.4rem);
+  font-weight:700;
+  color:var(--orange);
+  margin-bottom:1.5rem;
+  line-height:1.2;
+}
+.hero-sub{
+  font-size:1rem;
+  color:rgba(232,220,200,0.7);
+  max-width:480px;
+  line-height:1.8;
+  margin-bottom:2.5rem;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-orange{
+  background:var(--orange);
+  color:var(--white);
+  border:none;
+  padding:0.9rem 2rem;
+  border-radius:4px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:600;font-size:0.9rem;
+  letter-spacing:0.03em;
+  cursor:pointer;text-decoration:none;
+  display:inline-block;
+  transition:background 0.2s,transform 0.2s;
+}
+.btn-orange:hover{background:var(--orange-light);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;
+  color:var(--sand);
+  border:1px solid rgba(232,220,200,0.3);
+  padding:0.9rem 2rem;
+  border-radius:4px;
+  font-size:0.88rem;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  display:inline-block;
+  transition:border-color 0.2s,color 0.2s;
+}
+.btn-ghost:hover{border-color:var(--sand);color:var(--sand)}
 
-<p id="thank-you-message" style="display:none; color: rgba(255, 255, 255, 0.75); margin-top:10px;">
-  Thank you!
-</p>
+/* ── PHONE MOCKUP ── */
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+}
+.phone-frame{
+  width:240px;
+  background:#0a0f1a;
+  border-radius:36px;
+  border:2px solid rgba(232,220,200,0.2);
+  padding:12px;
+  box-shadow:0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  position:relative;
+  z-index:2;
+}
+.phone-notch{
+  width:70px;height:22px;
+  background:#0a0f1a;
+  border-radius:0 0 14px 14px;
+  margin:0 auto 8px;
+  position:relative;z-index:3;
+}
+.phone-screen{
+  background:#111827;
+  border-radius:24px;
+  overflow:hidden;
+  aspect-ratio:9/19;
+}
+.phone-header{
+  background:#1a2744;
+  padding:10px 12px 8px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.phone-logo-small{
+  display:flex;align-items:center;gap:6px;
+}
+.phone-logo-icon{
+  width:20px;height:20px;
+  border:1.5px solid var(--sand);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--sand);
+}
+.phone-logo-text{
+  font-family:'Noto Naskh Arabic',serif;
+  color:var(--sand);font-size:0.75rem;font-weight:600;
+}
+.phone-mahalli{
+  font-size:0.55rem;color:rgba(232,220,200,0.5);
+}
+.phone-call-screen{
+  background:linear-gradient(180deg,#1a2744 0%,#0d1829 100%);
+  padding:16px 12px;
+  display:flex;flex-direction:column;align-items:center;
+  gap:12px;
+}
+.phone-caller-img{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,#2D4A7A,#1a2744);
+  border:2.5px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Naskh Arabic',serif;
+  font-size:1.8rem;color:var(--sand);
+  overflow:hidden;
+}
+.phone-caller-name{
+  color:var(--sand);font-size:0.85rem;font-weight:600;text-align:center;
+}
+.phone-caller-role{
+  color:var(--orange);font-size:0.65rem;text-align:center;margin-top:-8px;
+}
+.waveform{
+  display:flex;align-items:center;gap:3px;height:32px;
+}
+.wave-bar{
+  width:3px;border-radius:2px;
+  background:var(--orange);
+  animation:wave 1.2s ease-in-out infinite;
+}
+.wave-bar:nth-child(1){height:8px;animation-delay:0s}
+.wave-bar:nth-child(2){height:18px;animation-delay:0.1s}
+.wave-bar:nth-child(3){height:28px;animation-delay:0.2s}
+.wave-bar:nth-child(4){height:14px;animation-delay:0.3s}
+.wave-bar:nth-child(5){height:22px;animation-delay:0.4s}
+.wave-bar:nth-child(6){height:10px;animation-delay:0.5s}
+.wave-bar:nth-child(7){height:26px;animation-delay:0.6s}
+.wave-bar:nth-child(8){height:16px;animation-delay:0.7s}
+.wave-bar:nth-child(9){height:8px;animation-delay:0.8s}
+@keyframes wave{
+  0%,100%{transform:scaleY(0.4);opacity:0.5}
+  50%{transform:scaleY(1);opacity:1}
+}
+.phone-tap{
+  font-size:0.6rem;color:rgba(232,220,200,0.5);
+  border:1px solid rgba(232,220,200,0.2);
+  padding:4px 10px;border-radius:100px;
+}
+.phone-actions{
+  display:flex;gap:24px;align-items:center;
+  padding:8px 0;
+}
+.phone-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.phone-btn-mute{background:rgba(255,255,255,0.1);color:var(--sand)}
+.phone-btn-end{background:#e53935;color:white;font-size:1.1rem}
+.phone-btn-label{font-size:0.5rem;color:rgba(232,220,200,0.5);text-align:center;margin-top:3px}
+
+.phone-chars{
+  padding:0 10px 10px;
+}
+.phone-chars-title{
+  font-size:0.6rem;color:rgba(232,220,200,0.5);
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;
+}
+.char-row{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+}
+.char-card{
+  background:rgba(255,255,255,0.05);
+  border-radius:8px;
+  padding:7px 8px;
+  display:flex;align-items:center;gap:6px;
+}
+.char-avatar{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,#2D4A7A,#3D5A8A);
+  border:1.5px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Naskh Arabic',serif;
+  font-size:0.8rem;color:var(--sand);
+  flex-shrink:0;
+}
+.char-info{flex:1;min-width:0}
+.char-name{font-size:0.6rem;color:var(--sand);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.char-role{font-size:0.5rem;color:rgba(232,220,200,0.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.char-talk{font-size:0.5rem;color:var(--orange);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+
+/* Floating context cards */
+.hero-float{
+  position:absolute;
+  background:rgba(13,24,41,0.9);
+  border:1px solid rgba(232,220,200,0.15);
+  border-radius:10px;
+  padding:10px 14px;
+  backdrop-filter:blur(8px);
+  animation:floatCard 4s ease-in-out infinite;
+  z-index:10;
+}
+.hero-float-1{top:15%;right:-80px;animation-delay:0s}
+.hero-float-2{bottom:20%;left:-100px;animation-delay:2s}
+@keyframes floatCard{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+.float-label{font-size:0.65rem;color:rgba(232,220,200,0.5);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+.float-value{font-size:0.85rem;color:var(--sand);font-weight:600}
+.float-sub{font-size:0.7rem;color:var(--orange)}
+
+/* ── WHAT IS DHAQIRA (Problem) ── */
+#problem{
+  background:var(--sand-pale);
+  padding:7rem 8vw;
+  position:relative;
+  overflow:hidden;
+}
+.problem-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6rem;align-items:center;
+}
+.section-eyebrow{
+  display:inline-block;
+  font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--orange);
+  font-weight:600;
+  margin-bottom:1rem;
+}
+.section-title{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:800;
+  line-height:1.15;
+  color:var(--navy);
+  margin-bottom:1.2rem;
+}
+.section-body{
+  font-size:0.95rem;
+  color:var(--text-mid);
+  line-height:1.85;
+  margin-bottom:1.2rem;
+}
+.stat-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+  margin-top:2rem;
+}
+.stat-card{
+  background:var(--navy);
+  border-radius:10px;
+  padding:1.2rem;
+}
+.stat-big{
+  font-family:'Playfair Display',serif;
+  font-size:2.2rem;font-weight:700;
+  color:var(--orange);
+  display:block;line-height:1;margin-bottom:0.3rem;
+}
+.stat-label{font-size:0.72rem;color:var(--sand);line-height:1.4}
+
+.problem-visual{position:relative}
+.imagine-card{
+  background:var(--navy);
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+}
+.imagine-img{
+  width:100%;aspect-ratio:4/3;
+  background:linear-gradient(135deg, #1B2B4B 0%, #0D1829 50%, #1a2030 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  flex-direction:column;
+}
+.imagine-img::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(13,24,41,0.35) 0%, rgba(13,24,41,0.6) 60%, rgba(13,24,41,0.85) 100%);
+  z-index:1;
+}
+.imagine-img .imagine-glow,.imagine-img .imagine-img-inner,.imagine-img .audio-lines{position:relative;z-index:2;}
+.imagine-img-inner{
+  text-align:center;
+  position:relative;z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+}
+.imagine-scholar{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,#2D4A7A,#1a2744);
+  border:3px solid var(--orange);
+  margin:0 auto 1rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Naskh Arabic',serif;
+  font-size:2.5rem;color:var(--sand);
+  box-shadow:0 0 40px rgba(232,116,34,0.3);
+}
+.imagine-glow{
+  position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(232,116,34,0.15),transparent 70%);
+  border-radius:50%;
+}
+.audio-lines{
+  position:relative;
+  display:flex;align-items:flex-end;justify-content:center;gap:3px;
+  width:100%;
+  max-width:200px;
+  height:50px;
+  z-index:2;
+  margin-top:0.5rem;
+}
+.audio-line{
+  flex:1;border-radius:2px;
+  background:rgba(232,116,34,0.6);
+  min-height:8px;
+  animation:audioWave 1.5s ease-in-out infinite;
+}
+.audio-line:nth-child(1){height:30%;animation-delay:0s}
+.audio-line:nth-child(2){height:60%;animation-delay:0.1s}
+.audio-line:nth-child(3){height:90%;animation-delay:0.2s}
+.audio-line:nth-child(4){height:50%;animation-delay:0.3s}
+.audio-line:nth-child(5){height:80%;animation-delay:0.4s}
+.audio-line:nth-child(6){height:40%;animation-delay:0.5s}
+.audio-line:nth-child(7){height:70%;animation-delay:0.6s}
+.audio-line:nth-child(8){height:30%;animation-delay:0.7s}
+@keyframes audioWave{
+  0%,100%{transform:scaleY(0.5);opacity:0.4}
+  50%{transform:scaleY(1);opacity:0.8}
+}
+.imagine-caption{
+  padding:1.2rem 1.5rem;
+  background:var(--navy-mid);
+}
+.imagine-caption-title{
+  font-family:'Cairo',sans-serif;
+  font-size:1.1rem;color:var(--sand);direction:rtl;text-align:right;
+  margin-bottom:0.3rem;
+  font-weight:700;
+}
+.imagine-caption-en{font-size:0.8rem;color:var(--orange)}
+.imagine-caption-sub{font-size:0.75rem;color:rgba(232,220,200,0.6);margin-top:4px}
+
+/* ── SOLUTION ── */
+#solution{
+  background:var(--navy);
+  padding:7rem 8vw;
+  position:relative;overflow:hidden;
+}
+#solution .arabic-bg::before{color:rgba(232,220,200,0.04);opacity:1}
+.solution-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.solution-header{text-align:center;margin-bottom:4rem}
+.solution-header .section-title{color:var(--sand)}
+.solution-header .section-body{color:rgba(232,220,200,0.65);max-width:600px;margin-left:auto;margin-right:auto}
+
+.products-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+}
+.product-card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(232,220,200,0.1);
+  border-radius:12px;
+  padding:2rem 1.5rem;
+  transition:background 0.3s,border-color 0.3s,transform 0.3s;
+  position:relative;overflow:hidden;
+}
+.product-card:hover{
+  background:rgba(255,255,255,0.08);
+  border-color:var(--orange);
+  transform:translateY(-4px);
+}
+.product-icon{
+  width:52px;height:52px;border-radius:12px;
+  background:rgba(232,116,34,0.15);
+  border:1px solid rgba(232,116,34,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.2rem;
+}
+.product-name{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1rem;font-weight:700;
+  color:var(--sand);margin-bottom:0.5rem;
+}
+.product-arabic{
+  font-family:'Cairo',sans-serif;
+  font-size:0.85rem;color:var(--orange);
+  margin-bottom:0.8rem;
+  display:block;
+  font-weight:600;
+}
+.product-desc{font-size:0.82rem;color:rgba(232,220,200,0.6);line-height:1.7}
+.product-tag{
+  display:inline-block;margin-top:1rem;
+  font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
+  background:rgba(232,116,34,0.15);
+  color:var(--orange);
+  padding:3px 8px;border-radius:2px;
+}
+
+/* ── HOW IT WORKS ── */
+#how{
+  background:var(--sand-pale);
+  padding:7rem 8vw;
+}
+.how-inner{max-width:1100px;margin:0 auto}
+.how-header{margin-bottom:4rem}
+.ei-explainer{
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;
+}
+.ei-visual{
+  background:var(--navy);
+  border-radius:16px;
+  padding:2rem;
+  position:relative;overflow:hidden;
+}
+.ei-visual .arabic-bg::before{opacity:0.15;font-size:2rem}
+.ei-label{
+  font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:1rem;position:relative;z-index:2;
+}
+.ei-center{
+  width:80px;height:80px;border-radius:50%;
+  background:var(--navy-mid);
+  border:2px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  position:relative;z-index:2;
+}
+.ei-badge{
+  background:var(--orange);
+  color:var(--white);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;font-size:1.2rem;
+  padding:0.3rem 0.8rem;border-radius:4px;
+}
+.ei-arrows{
+  display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;
+  position:relative;z-index:2;
+}
+.ei-platform{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(232,220,200,0.15);
+  border-radius:8px;
+  padding:0.6rem 0.8rem;
+  text-align:center;
+  flex:1;
+}
+.ei-platform-name{font-size:0.7rem;color:var(--sand);font-weight:600}
+.ei-platform-sub{font-size:0.58rem;color:rgba(232,220,200,0.4)}
+
+.rag-box{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(232,220,200,0.1);
+  border-radius:8px;
+  padding:1rem;
+  position:relative;z-index:2;
+}
+.rag-title{font-size:0.72rem;color:var(--orange);font-weight:600;margin-bottom:0.6rem}
+.rag-items{display:flex;flex-direction:column;gap:0.4rem}
+.rag-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.72rem;color:rgba(232,220,200,0.6);
+}
+.rag-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+
+.how-steps{display:flex;flex-direction:column;gap:1.5rem}
+.how-step{
+  display:flex;gap:1rem;
+  padding:1.2rem;
+  background:var(--white);
+  border:1px solid var(--border-light);
+  border-radius:10px;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.how-step:hover{border-color:var(--orange);transform:translateX(4px)}
+.step-num{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-family:'Playfair Display',serif;
+  font-weight:700;font-size:0.9rem;
+  color:var(--orange);
+}
+.step-title{font-weight:600;font-size:0.9rem;color:var(--navy);margin-bottom:0.3rem}
+.step-desc{font-size:0.8rem;color:var(--text-muted);line-height:1.7}
+
+/* ── USE CASES ── */
+#usecases{
+  background:var(--navy-deep);
+  padding:7rem 8vw;
+  position:relative;overflow:hidden;
+}
+#usecases .arabic-bg::before{opacity:0.04}
+.usecases-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.usecases-header{text-align:center;margin-bottom:4rem}
+.usecases-header .section-title{color:var(--sand)}
+
+.cases-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto auto;
+  gap:1.5rem;
+}
+.case-card{
+  border-radius:14px;
+  overflow:hidden;
+  background:var(--navy-mid);
+  border:1px solid rgba(232,220,200,0.08);
+  transition:transform 0.3s,border-color 0.3s;
+}
+.case-card:hover{transform:translateY(-4px);border-color:rgba(232,116,34,0.4)}
+.case-card.featured{
+  grid-column:1 / span 2;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.case-img{
+  height:200px;
+  background:linear-gradient(135deg,#243355,#1B2B4B);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.case-card.featured .case-img{
+  height:280px;
+}
+.case-img-content{text-align:center;position:relative;z-index:2;padding:1rem}
+.case-face{
+  width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,#2D4A7A,#1a2744);
+  border:2px solid var(--orange);
+  margin:0 auto 0.6rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Noto Naskh Arabic',serif;
+  font-size:1.5rem;color:var(--sand);
+}
+.case-quote-title{
+  font-size:0.7rem;font-weight:700;color:var(--sand);
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.case-quote-sub{font-size:0.62rem;color:var(--orange);margin-top:2px}
+.case-phone-pill{
+  background:rgba(0,0,0,0.3);
+  border:1px solid rgba(232,220,200,0.15);
+  border-radius:100px;
+  padding:0.3rem 0.8rem;
+  font-size:0.62rem;color:var(--sand);
+  margin-top:0.5rem;display:inline-flex;align-items:center;gap:5px;
+}
+.pill-dot{width:5px;height:5px;border-radius:50%;background:var(--orange);animation:blink 2s infinite}
+.case-body{padding:1.2rem}
+.case-product-tag{
+  font-size:0.65rem;color:var(--orange);font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;
+}
+.case-title{font-weight:700;font-size:0.9rem;color:var(--sand);margin-bottom:0.4rem}
+.case-desc{font-size:0.78rem;color:rgba(232,220,200,0.55);line-height:1.65}
+
+/* ── BUILT FOR INTEGRITY ── */
+#integrity{
+  background:var(--sand-light);
+  padding:7rem 8vw;
+}
+.integrity-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.integrity-points{display:flex;flex-direction:column;gap:1.2rem;margin-top:2rem}
+.int-point{
+  display:flex;gap:1rem;
+  padding:1.2rem;
+  background:var(--white);
+  border-radius:10px;
+  border-left:3px solid var(--orange);
+}
+.int-icon{font-size:1.3rem;flex-shrink:0;padding-top:2px}
+.int-title{font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:0.3rem}
+.int-desc{font-size:0.8rem;color:var(--text-muted);line-height:1.65}
+
+.integrity-visual{
+  background:var(--navy);
+  border-radius:16px;
+  padding:2rem;
+  position:relative;overflow:hidden;
+}
+.integrity-visual .arabic-bg::before{opacity:0.1;font-size:2.5rem}
+.int-vis-label{font-size:0.65rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.2rem;position:relative;z-index:2}
+.int-flow{display:flex;flex-direction:column;gap:1rem;position:relative;z-index:2}
+.int-step{
+  background:rgba(255,255,255,0.06);
+  border-radius:8px;
+  padding:0.8rem 1rem;
+  display:flex;align-items:center;gap:10px;
+}
+.int-step-icon{
+  width:32px;height:32px;border-radius:6px;
+  background:rgba(232,116,34,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;flex-shrink:0;
+}
+.int-step-text{font-size:0.78rem;color:rgba(232,220,200,0.8);line-height:1.5}
+.int-step-text strong{color:var(--sand);display:block;margin-bottom:1px}
+.int-arrow{text-align:center;color:var(--orange);font-size:1rem;opacity:0.5}
+
+/* ── ROADMAP ── */
+#roadmap{
+  background:var(--sand-pale);
+  padding:7rem 8vw;
+}
+.roadmap-inner{max-width:1100px;margin:0 auto}
+.roadmap-header{text-align:center;margin-bottom:4rem}
+.timeline{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  position:relative;
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  top:52px;left:10%;right:10%;
+  height:2px;
+  background:linear-gradient(to right,var(--orange),var(--navy));
+  z-index:0;
+}
+.tl-item{
+  position:relative;z-index:1;
+  text-align:center;
+  padding:0 0.5rem;
+}
+.tl-icon-wrap{
+  width:64px;height:64px;border-radius:16px;
+  background:var(--navy);
+  border:2px solid var(--border-light);
+  margin:0 auto 1rem;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+  transition:border-color 0.2s;
+  position:relative;
+}
+.tl-item:nth-child(1) .tl-icon-wrap{border-color:var(--orange)}
+.tl-item:nth-child(2) .tl-icon-wrap{border-color:var(--orange)}
+.tl-quarter{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1rem;font-weight:700;
+  color:var(--navy);margin-bottom:0.5rem;
+}
+.tl-quarter em{
+  display:block;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-style:normal;
+  font-size:0.65rem;
+  color:var(--orange);
+  font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:2px;
+}
+.tl-desc{font-size:0.73rem;color:var(--text-muted);line-height:1.6}
+.tl-status{
+  display:inline-block;margin-top:0.5rem;
+  font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:100px;font-weight:600;
+}
+.status-done{background:rgba(232,116,34,0.15);color:var(--orange)}
+.status-now{background:var(--orange);color:var(--white)}
+.status-next{background:rgba(27,43,75,0.1);color:var(--text-muted)}
+
+/* ── MAHALLI CTA ── */
+#cta{
+  background:var(--navy);
+  padding:7rem 8vw;
+  position:relative;overflow:hidden;
+}
+#cta .arabic-bg::before{opacity:0.05}
+.cta-inner{
+  max-width:700px;margin:0 auto;
+  text-align:center;position:relative;z-index:2;
+}
+.cta-logo-lockup{
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  margin-bottom:2.5rem;
+}
+.cta-logo-dhaqira{
+  font-family:'Cairo',sans-serif;
+  font-size:2rem;color:var(--sand);font-weight:800;
+}
+.cta-by{font-size:0.75rem;color:var(--text-muted)}
+.cta-mahalli{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.85rem;font-weight:700;
+  color:var(--sand);
+}
+.cta-title{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;
+  line-height:1.15;
+  color:var(--sand);
+  margin-bottom:1rem;
+}
+.cta-title span{color:var(--orange)}
+.cta-sub{
+  font-size:0.95rem;color:rgba(232,220,200,0.65);
+  max-width:500px;margin:0 auto 2.5rem;
+  line-height:1.8;
+}
+.email-row{
+  display:flex;gap:0.75rem;max-width:440px;margin:0 auto 1.5rem;
+}
+.email-input{
+  flex:1;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(232,220,200,0.2);
+  color:var(--sand);
+  padding:0.85rem 1.2rem;
+  border-radius:4px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.85rem;
+  outline:none;transition:border-color 0.2s;
+}
+.email-input:focus{border-color:var(--orange)}
+.email-input::placeholder{color:rgba(232,220,200,0.3)}
+.cta-options{
+  display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;
+  flex-wrap:wrap;
+}
+.cta-option{
+  font-size:0.78rem;color:rgba(232,220,200,0.5);
+  display:flex;align-items:center;gap:5px;
+}
+.option-check{color:var(--orange)}
+#form-success{display:none;margin-top:1rem;font-size:0.85rem;color:var(--orange)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--navy-deep);
+  border-top:1px solid rgba(232,220,200,0.08);
+  padding:2.5rem 8vw;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;
+  max-width:1100px;margin:0 auto;
+}
+.footer-logo{
+  display:flex;flex-direction:column;gap:3px;
+}
+.footer-dhaqira{
+  font-family:'Cairo',sans-serif;
+  font-size:1.2rem;color:var(--sand);font-weight:700;
+}
+.footer-tagline{font-size:0.72rem;color:var(--text-muted)}
+.footer-links{display:flex;gap:2rem;list-style:none}
+.footer-links a{
+  font-size:0.78rem;color:var(--text-muted);text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--orange)}
+.footer-meta{font-size:0.72rem;color:var(--text-muted)}
+.footer-meta a{color:var(--sand);text-decoration:none}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding:8rem 6vw 5rem;gap:3rem}
+  .hero-right{display:none}
+  .problem-inner,.ei-explainer,.integrity-inner{grid-template-columns:1fr}
+  .products-grid{grid-template-columns:1fr 1fr}
+  .cases-grid{grid-template-columns:1fr}
+  .case-card.featured{grid-column:1;grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .timeline::before{display:none}
+}
+@media(max-width:640px){
+  nav .nav-links{display:none}
+  .products-grid{grid-template-columns:1fr}
+  .stat-cards{grid-template-columns:1fr 1fr}
+  .timeline{grid-template-columns:1fr}
+  .email-row{flex-direction:column}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+.case-img img{width:100%;height:100%;object-fit:cover;display:block;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="img/logo-spiral.png" style="width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1);" alt="Dhaqira"/>
+    <div>
+      <span class="nav-wordmark"><span>.ai</span></span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">About</a></li>
+    <li><a href="#solution">Product</a></li>
+    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#cta" class="nav-cta">Get Early Access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="eyebrow-dot"></span> Now in Development · Be First to Know</div>
+    <div class="hero-title-en">Talk to the Greatest Minds — Anytime</div>
+    <p class="hero-sub">
+      Dhaqira builds AI-powered digital twins of thinkers, scholars, and leaders. Real voice conversations. Deep archives. Trusted knowledge — for a new generation.
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn-orange">Request Early Access</a>
+      <a href="#solution" class="btn-ghost">Explore the Product →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <!-- Phone mockup -->
+    <div style="position:relative">
+      <div class="hero-float hero-float-1">
+        <div class="float-label">Active Now</div>
+        <div class="float-value">Moncef Marzouki</div>
+        <div class="float-sub">💬 Talking with 3 users</div>
+      </div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-logo-small">
+              <div class="phone-logo-icon">◎</div>
+              <span class="phone-logo-text"></span>
+            </div>
+            <span class="phone-mahalli">Mahalli Labs</span>
+          </div>
+          <!-- Call screen -->
+          <div class="phone-call-screen">
+            <!-- Replace img/marzouki-avatar.jpg to change the caller photo -->
+            <img src="img/marzouki-avatar.jpg" class="phone-caller-img" alt="Dr. Moncef Marzouki" style="object-fit:cover;border:2.5px solid var(--orange);"/>
+            <div class="phone-caller-name">Dr. Moncef Marzouki</div>
+            <div class="phone-caller-role">Former President of Tunisia</div>
+            <div class="waveform">
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div><div class="wave-bar"></div>
+              <div class="wave-bar"></div>
+            </div>
+            <div class="phone-tap">Tap to interrupt</div>
+            <div class="phone-actions">
+              <div style="text-align:center">
+                <div class="phone-btn phone-btn-mute">🔇</div>
+                <div class="phone-btn-label">Mute</div>
+              </div>
+              <div style="text-align:center">
+                <div class="phone-btn phone-btn-end">✕</div>
+                <div class="phone-btn-label">End call</div>
+              </div>
+            </div>
+          </div>
+          <!-- Character list -->
+          <div class="phone-chars">
+            <div class="phone-chars-title">Explore Characters</div>
+            <div class="char-row">
+              <div class="char-card">
+                <div class="char-avatar"><img src="img/Naom.jpg" alt="Noam Chomsky" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/></div>
+                <div class="char-info">
+                  <div class="char-name">Noam Chomsky</div>
+                  <div class="char-role">Linguist</div>
+                  <div class="char-talk">TALK</div>
+                </div>
+              </div>
+              <div class="char-card">
+                <div class="char-avatar"><img src="img/Azmi.jpg" alt="Azmi Bishara" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/></div>
+                <div class="char-info">
+                  <div class="char-name">Azmi Bishara</div>
+                  <div class="char-role">Thinker</div>
+                  <div class="char-talk">TALK</div>
+                </div>
+              </div>
+              <div class="char-card">
+                <div class="char-avatar">ع</div>
+                <div class="char-info">
+                  <div class="char-name">Edward Said</div>
+                  <div class="char-role">Scholar</div>
+                  <div class="char-talk">TALK</div>
+                </div>
+              </div>
+              <div class="char-card">
+                <div class="char-avatar">ب</div>
+                <div class="char-info">
+                  <div class="char-name">Ibn Battuta</div>
+                  <div class="char-role">Explorer</div>
+                  <div class="char-talk">TALK</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-float hero-float-2">
+        <div class="float-label">Archive Depth</div>
+        <div class="float-value">Full RAG System</div>
+        <div class="float-sub">Books, interviews, articles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / WHAT IS DHAQIRA -->
+<section id="problem">
+  <div class="problem-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">The Problem</div>
+      <h2 class="section-title">Human knowledge is locked away.</h2>
+      <p class="section-body">
+        AI companions are rapidly changing how people learn, ask questions, and engage with ideas. Yet most are designed for entertainment, optimized for engagement, and disconnected from the people whose ideas shaped our world.
+      </p>
+      <p class="section-body">
+        From Ibn Khaldun to Noam Chomsky, from Taha Hussein to Azmi Bishara, humanity's most important conversations are becoming harder, not easier to access.
+      </p>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <span class="stat-big">200M+</span>
+          <span class="stat-label">users of AI companion apps globally, 75% under 35</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-big">48%</span>
+          <span class="stat-label">higher retention rate vs social media apps</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-big">25–45</span>
+          <span class="stat-label">minutes per session average, every day</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-big">0</span>
+          <span class="stat-label">culturally-rooted Arab AI companion platforms today</span>
+        </div>
+      </div>
+    </div>
+    <div class="problem-visual reveal">
+      <div class="imagine-card">
+        <div class="imagine-img">
+          <div class="imagine-glow"></div>
+          <div class="imagine-img-inner">
+            <img src="img/Naom.jpg" class="imagine-scholar" alt="Noam Chomsky" style="object-fit:cover;"/>
+            <div style="font-size:0.75rem;color:rgba(232,220,200,0.6);margin-bottom:0.5rem">Imagine talking with</div>
+            <div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#E8DCC8;font-size:0.9rem">Noam Chomsky</div>
+            <div style="font-size:0.72rem;color:#E87422;margin-bottom:0.8rem">Linguist & Public Intellectual</div>
+            <div style="font-size:0.7rem;color:rgba(232,220,200,0.5);font-style:italic;max-width:180px;margin:0 auto;line-height:1.5">"Questions matter more than answers."</div>
+            <div class="audio-lines">
+              <div class="audio-line"></div><div class="audio-line"></div>
+              <div class="audio-line"></div><div class="audio-line"></div>
+              <div class="audio-line"></div><div class="audio-line"></div>
+              <div class="audio-line"></div><div class="audio-line"></div>
+            </div>
+          </div>
+        </div>
+        <div class="imagine-caption">
+          <div class="imagine-caption-en">Start a conversation with Noam Chomsky</div>
+          <div class="imagine-caption-sub">Explore his ideas through dialogue.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="arabic-bg"></div>
+  <div class="solution-inner">
+    <div class="solution-header reveal">
+      <div class="section-eyebrow" style="color:var(--orange)">The Solution</div>
+      <h2 class="section-title" style="color:var(--sand)">We Build Digital Twins of Great Minds</h2>
+      <p class="section-body" style="color:rgba(232,220,200,0.65)">
+        We call them Emulated Identities (EIs) — AI personas that simulate the voice, memory, reasoning style, and intellectual positions of each thinker, powered by a RAG system built on their full personal archive.
+      </p>
+    </div>
+    <div class="products-grid reveal">
+      <div class="product-card">
+        <div class="product-icon">🎙️</div>
+        <div class="product-name">Dhaqira Podcast</div>
+        <span class="product-arabic">بودكاست ذاكرة</span>
+        <p class="product-desc">Audience-led voice interviews with digital twins. Listeners ask their questions. The character responds. The most insightful exchanges become publishable podcast episodes.</p>
+        <span class="product-tag">Live Now (Pilot)</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📱</div>
+        <div class="product-name">Dhaqira App</div>
+        <span class="product-arabic">تطبيق ذاكرة</span>
+        <p class="product-desc">A Library of Great Minds. Talk with influential thinkers, writers, scientists, and leaders directly from your phone — voice, anytime, anywhere.</p>
+        <span class="product-tag">H2 2026</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🏫</div>
+        <div class="product-name">Dhaqira Class</div>
+        <span class="product-arabic">دروس ذاكرة</span>
+        <p class="product-desc">Licensed to schools and universities. Students learn history, ethics, and journalism by dialoguing with recreated thinkers — not reading textbooks.</p>
+        <span class="product-tag">Pilot H2 2026</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">📚</div>
+        <div class="product-name">Dhaqira Library</div>
+        <span class="product-arabic">ذاكرة المكتبة</span>
+        <p class="product-desc">Ask an author exactly where and when they said something. Find the quote, the page, the source. Deep search across a thinker's entire published body of work.</p>
+        <span class="product-tag">In Development</span>
+      </div>
+      <div class="product-card">
+        <div class="product-icon">🏛️</div>
+        <div class="product-name">Dhaqira Hall</div>
+        <span class="product-arabic">ذاكرة للمتاحف</span>
+        <p class="product-desc">Museum and institution kiosks. Visitors can speak directly with historical figures at physical installations — from libraries to cultural heritage sites.</p>
+        <span class="product-tag">H2 2026</span>
+      </div>
+      <div class="product-card" style="background:rgba(232,116,34,0.08);border-color:rgba(232,116,34,0.2)">
+        <div class="product-icon" style="background:rgba(232,116,34,0.2);border-color:var(--orange)">🌐</div>
+        <div class="product-name" style="color:var(--orange)">Open Platform</div>
+        <span class="product-arabic" style="color:rgba(232,220,200,0.5)">منصة مفتوحة</span>
+        <p class="product-desc" style="color:rgba(232,220,200,0.5)">Institutions, media networks, and governments can license Dhaqira's infrastructure to build their own culturally-specific knowledge companions.</p>
+        <span class="product-tag" style="background:rgba(232,116,34,0.2);color:var(--orange)">B2B Licensing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <div class="section-eyebrow">How It Works</div>
+      <h2 class="section-title">From Archive to Living Conversation</h2>
+    </div>
+    <div class="ei-explainer">
+      <div class="ei-visual reveal">
+        <div class="arabic-bg"></div>
+        <div class="ei-label">The EI Architecture</div>
+        <!-- Replace img/ei-diagram.jpg to change this diagram -->
+        <img src="img/ei-diagram.svg" alt="Dhaqira EI ecosystem diagram" style="width:100%;border-radius:8px;background:#fff;padding:8px;margin-bottom:1rem;display:block;"/>
+        <div class="rag-box">
+          <div class="rag-title">RAG-Powered Knowledge Base</div>
+          <div class="rag-items">
+            <div class="rag-item"><div class="rag-dot"></div>Full archive of books & publications</div>
+            <div class="rag-item"><div class="rag-dot"></div>Decades of TV and radio interviews</div>
+            <div class="rag-item"><div class="rag-dot"></div>Articles, speeches, and unpublished notes</div>
+            <div class="rag-item"><div class="rag-dot"></div>Editorially verified and curated data</div>
+            <div class="rag-item"><div class="rag-dot"></div>Arabic-native LLM backbone</div>
+          </div>
+        </div>
+      </div>
+      <div class="how-steps">
+        <div class="how-step reveal">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Build the archive</div>
+            <p class="step-desc">We collect and verify every book, interview, article, and speech for the figure — decades of output, carefully curated.</p>
+          </div>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Train the Identity (EI)</div>
+            <p class="step-desc">A RAG system built on the full archive feeds an Arabic-native LLM. The EI learns the thinker's voice, logic, opinions, and intellectual evolution.</p>
+          </div>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">Verify with the source</div>
+            <p class="step-desc">For living figures, each EI is reviewed and approved by the person themselves — creating a verified, trust-backed identity, not a hallucination.</p>
+          </div>
+        </div>
+        <div class="how-step reveal">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-title">Deploy across platforms</div>
+            <p class="step-desc">The EI is accessible via voice on the app, in classrooms, through museum kiosks, or as a live podcast guest — one identity, many surfaces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="arabic-bg"></div>
+  <div class="usecases-inner">
+    <div class="usecases-header reveal">
+      <div class="section-eyebrow" style="color:var(--orange)">Use Cases</div>
+      <h2 class="section-title">Where Dhaqira Comes to Life</h2>
+    </div>
+    <div class="cases-grid reveal">
+      <div class="case-card featured">
+        <!-- Replace img/usecase-podcast.jpg to change this image -->
+        <div class="case-img" style="padding:0;overflow:hidden">
+          <img src="img/usecase-podcast.jpg" alt="Talk to Dr. Moncef Marzouki" style="width:100%;height:100%;object-fit:cover;display:block;min-height:200px;"/>
+        </div>
+        <div class="case-body">
+          <div class="case-product-tag">Dhaqira Podcast</div>
+          <div class="case-title">The Interactive Podcast</div>
+          <p class="case-desc">Audience members dial in and interview the digital twin live. The conversation becomes publishable content — a podcast where every listener can be the host. Think Shahid Ala Al-Asr, reimagined.</p>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <!-- Replace img/usecase-class.jpg to change this image -->
+        <div class="case-img" style="padding:0;overflow:hidden">
+          <img src="img/usecase-class.jpg" alt="Students learning with Dhaqira Class" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        </div>
+        <div class="case-body">
+          <div class="case-product-tag">Dhaqira Class</div>
+          <div class="case-title">Classroom Learning</div>
+          <p class="case-desc">Students dialogue with historical thinkers in real time. A World Bank study found 6 weeks of AI-assisted learning equalled 2 years of traditional study.</p>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <!-- Replace img/usecase-library.jpg to change this image -->
+        <div class="case-img" style="padding:0;overflow:hidden">
+          <img src="img/usecase-library.jpg" alt="Library kiosk with Dhaqira" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        </div>
+        <div class="case-body">
+          <div class="case-product-tag">Dhaqira Library</div>
+          <div class="case-title">Research Tool</div>
+          <p class="case-desc">Search a thinker's full archive by meaning, not just keywords. Find the exact quote, page, and publication — turning rare collections into living research companions.</p>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <!-- Replace img/usecase-hall.jpg to change this image -->
+        <div class="case-img" style="padding:0;overflow:hidden">
+          <img src="img/usecase-hall.jpg" alt="Museum kiosk with Dhaqira Hall" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        </div>
+        <div class="case-body">
+          <div class="case-product-tag">Dhaqira Hall</div>
+          <div class="case-title">Museums & Heritage Sites</div>
+          <p class="case-desc">Physical kiosks let museum visitors hold conversations with historical figures. Exhibits become interactive. Joe Biden reflects on his presidency in his own words.</p>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <!-- Replace img/usecase-app.jpg to change this image -->
+        <div class="case-img" style="padding:0;overflow:hidden">
+          <img src="img/usecase-app.jpg" alt="Person using Dhaqira App" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        </div>
+        <div class="case-body">
+          <div class="case-product-tag">Dhaqira App</div>
+          <div class="case-title">Daily Companion</div>
+          <p class="case-desc">Access the full library of historical and contemporary figures from your phone. The first AI companion built for Arab identity, culture, and intellectual tradition.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRITY -->
+<section id="integrity">
+  <div class="integrity-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Built for Trust</div>
+      <h2 class="section-title">Designed for Integrity, Not Imitation</h2>
+      <p class="section-body">
+        Anyone can prompt an LLM to "act like" a thinker. Dhaqira does something different — building verified, archive-backed identities that are impossible to replicate.
+      </p>
+      <div class="integrity-points">
+        <div class="int-point">
+          <div class="int-icon">📖</div>
+          <div>
+            <div class="int-title">Deep Archive, Not Guesswork</div>
+            <p class="int-desc">Every EI is trained on the complete archive of the figure: books, interviews, articles, speeches — decades of intellectual output, rigorously curated.</p>
+          </div>
+        </div>
+        <div class="int-point">
+          <div class="int-icon">✅</div>
+          <div>
+            <div class="int-title">Source-Verified by the Person</div>
+            <p class="int-desc">Living figures review and approve their EI before it goes live. This isn't hallucination — it's a verified, ongoing collaborative relationship.</p>
+          </div>
+        </div>
+        <div class="int-point">
+          <div class="int-icon">🌍</div>
+          <div>
+            <div class="int-title">Arabic-Native, Culturally Grounded</div>
+            <p class="int-desc">Built on Arabic-native models with deep cultural context — not a Western model with Arabic text pasted in. The difference is felt in every conversation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="integrity-visual reveal">
+      <div class="arabic-bg"></div>
+      <div class="int-vis-label">How Trust Is Built</div>
+      <div class="int-flow">
+        <div class="int-step">
+          <div class="int-step-icon">📦</div>
+          <div class="int-step-text"><strong>Full archive collected</strong>Books, interviews, articles over career</div>
+        </div>
+        <div class="int-arrow">↓</div>
+        <div class="int-step">
+          <div class="int-step-icon">✏️</div>
+          <div class="int-step-text"><strong>Editorial verification</strong>High-quality curation, no noise in the RAG</div>
+        </div>
+        <div class="int-arrow">↓</div>
+        <div class="int-step">
+          <div class="int-step-icon">🧠</div>
+          <div class="int-step-text"><strong>EI trained on verified data</strong>Arabic-native LLM + full RAG system</div>
+        </div>
+        <div class="int-arrow">↓</div>
+        <div class="int-step">
+          <div class="int-step-icon">🤝</div>
+          <div class="int-step-text"><strong>Approved by the person</strong>Living figures sign off — ongoing collaboration</div>
+        </div>
+        <div class="int-arrow">↓</div>
+        <div class="int-step">
+          <div class="int-step-icon">🌐</div>
+          <div class="int-step-text"><strong>Deployed with trust badge</strong>Users know this identity is verified & authentic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="roadmap-inner">
+    <div class="roadmap-header reveal">
+      <div class="section-eyebrow">Roadmap</div>
+      <h2 class="section-title">From Podcast to Platform</h2>
+      <p class="section-body" style="max-width:560px;margin:0 auto">Dhaqira launches as a podcast, then grows into a platform that reshapes how knowledge is taught, discussed, and preserved.</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-icon-wrap">🧠</div>
+        <div class="tl-quarter"><em>Q2 2025</em>Founded</div>
+        <p class="tl-desc">Born as a thesis project at CUNY Graduate School of Journalism. Vision established.</p>
+        <span class="tl-status status-done">Done ✓</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon-wrap">🎙️</div>
+        <div class="tl-quarter"><em>Q4 2025</em>Podcast Pilot</div>
+        <p class="tl-desc">First voice prototypes. Audio-based beta test with early users in Qatar.</p>
+        <span class="tl-status status-done">Done ✓</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon-wrap">🏛️</div>
+        <div class="tl-quarter"><em>H1 2026</em>Partnerships</div>
+        <p class="tl-desc">Presenting to Qatar Museums, Qatar National Library, Media City, Ministry of Education.</p>
+        <span class="tl-status status-now">Now →</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon-wrap">📱</div>
+        <div class="tl-quarter"><em>H2 2026</em>App Launch</div>
+        <p class="tl-desc">Beta launch of Dhaqira App + Dhaqira Class pilot with media and education partners.</p>
+        <span class="tl-status status-next">Upcoming</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon-wrap">🌍</div>
+        <div class="tl-quarter"><em>2027</em>Scale</div>
+        <p class="tl-desc">Regional expansion. Cultural and educational licensing network.</p>
+        <span class="tl-status status-next">Upcoming</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="arabic-bg"></div>
+  <div class="cta-inner reveal">
+    <div class="cta-logo-lockup" style="flex-direction:column;gap:1.2rem;">
+      <!-- Replace img/logo-spiral.png to change the Dhaqira logo -->
+      <img src="img/logo-spiral.png" alt="Dhaqira" style="height:64px;object-fit:contain;filter:brightness(0) invert(0.85) sepia(0.3) saturate(2) hue-rotate(10deg);"/>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div class="cta-by" style="font-size:0.78rem;">a venture by</div>
+        <!-- Replace img/mahalli-logo.png to change the Mahalli Labs logo -->
+        <img src="img/mahalli-logo.png" alt="Mahalli Labs" style="height:128px;object-fit:contain;filter:brightness(0) invert(0.8);display:block;"/>
+      </div>
+    </div>
+    <h2 class="cta-title">Be Part of <span>What's Being Built</span></h2>
+    <p class="cta-sub">We're looking for early partners. Are you an educator, museum, media organization, or cultural institution?</p>
+    <div class="email-row" style="justify-content:center;">
+      <a class="btn-orange" href="https://calendly.com/mahalli-info" target="_blank" rel="noreferrer noopener">Book a discovery call</a>
+    </div>
+    <div class="cta-options">
+      <span class="cta-option"><span class="option-check">✓</span> Explore pilot opportunities</span>
+      <span class="cta-option"><span class="option-check">✓</span> No commitment, just a conversation</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:10px;">
+      <!-- Replace img/logo-spiral.png to change the footer logo -->
+      <img src="img/logo-spiral.png" alt="Dhaqira" style="width:26px;height:26px;object-fit:contain;filter:brightness(0) invert(0.6);flex-shrink:0;"/>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#problem">About</a></li>
+      <li><a href="#solution">Product</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="mailto:info@mahalli.net">Contact</a></li>
+    </ul>
+    <div class="footer-meta">© 2026 Dhaqira / <a href="https://mahalli.net" target="_blank">Mahalli Labs</a> · Doha · Tunis · Vancouver</div>
+  </div>
+</footer>
+
 <script>
-  function showThankYou() {
-    document.getElementById("thank-you-message").style.display = "block";
-  }
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+
 </script>
-
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li>
-						<a href="https://www.linkedin.com/company/mahallilabs" class="icon brands fa-linkedin">
-							<span class="label">LinkedIn</span>
-						</a>
-					</li>
-				</ul>
-				<ul class="copyright">
-					<li>&copy; 2025 ArabSky</li>
-					<li>Design by <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
