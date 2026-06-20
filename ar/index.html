@@ -101,6 +101,11 @@ nav{
   margin-left:2px;
   vertical-align:super;
 }
+.nav-start{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+}
 .nav-links{
   display:flex;align-items:center;gap:2rem;list-style:none;
 }
@@ -111,6 +116,21 @@ nav{
   transition:color 0.2s;
 }
 .nav-links a:hover{color:var(--sand)}
+.lang-switch{
+  font-size:0.78rem;
+  font-family:'Cairo',sans-serif;
+  color:rgba(232,220,200,0.75);
+  text-decoration:none;
+  border:1px solid rgba(232,220,200,0.2);
+  padding:0.35rem 0.8rem;
+  border-radius:100px;
+  transition:color 0.2s,border-color 0.2s,background 0.2s;
+}
+.lang-switch:hover{
+  color:var(--sand);
+  border-color:rgba(232,220,200,0.5);
+  background:rgba(232,220,200,0.08);
+}
 .nav-cta{
   background:var(--orange);
   color:var(--white)!important;
@@ -1071,20 +1091,23 @@ html[dir="rtl"] .tl-desc{
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <img src="../img/logo-spiral.png" style="width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1);" alt="Dhaqira"/>
-    <div>
-      <span class="nav-wordmark"><span>.ai</span></span>
-    </div>
-  </a>
+  <div class="nav-start">
+    <a href="#" class="nav-logo">
+      <img src="../img/logo-spiral.png" style="width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1);" alt="Dhaqira"/>
+      <div>
+        <span class="nav-wordmark"><span>.ai</span></span>
+      </div>
+    </a>
+    <a href="../index.html" class="lang-switch">EN</a>
+  </div>
   <ul class="nav-links">
     <li><a href="#problem">عن ذاكرة</a></li>
     <li><a href="#solution">المنتج</a></li>
     <li><a href="#usecases">الاستخدامات</a></li>
     <li><a href="#roadmap">خارطة الطريق</a></li>
-<li><a href="#cta" class="nav-cta">تحدّث معنا</a></li>
+    <li><a href="#cta" class="nav-cta">تحدّث معنا</a></li>
   </ul>
-<a href="../index.html" class="lang-switch" style="margin-right:1.5rem;font-size:0.78rem;color:rgba(232,220,200,0.6);text-decoration:none;border:1px solid rgba(232,220,200,0.2);padding:0.35rem 0.8rem;border-radius:100px;">EN</a></nav>
+</nav>
 
 <!-- HERO -->
 <section id="hero">
