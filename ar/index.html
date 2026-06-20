@@ -166,6 +166,7 @@ nav{
   color:var(--orange);
   margin-bottom:1.5rem;
   line-height:1.2;
+  word-break:keep-all;
 }
 .hero-sub{
   font-size:1rem;
@@ -373,7 +374,19 @@ nav{
 .problem-inner{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:1fr 1fr;
-  gap:6rem;align-items:center;
+  gap:6rem;align-items:stretch;
+}
+.problem-visual{
+  min-height:0;
+}
+.imagine-card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+.imagine-img{
+  flex:1 1 auto;
+  min-height:0;
 }
 .section-eyebrow{
   display:inline-block;
@@ -567,7 +580,11 @@ nav{
 .how-inner{max-width:1100px;margin:0 auto}
 .how-header{margin-bottom:4rem}
 .ei-explainer{
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:stretch;
+}
+.ei-visual,
+.how-steps{
+  height:100%;
 }
 .ei-visual{
   background:var(--navy);
@@ -617,18 +634,18 @@ nav{
   padding:1rem;
   position:relative;z-index:2;
 }
-.rag-title{font-size:0.72rem;color:var(--orange);font-weight:600;margin-bottom:0.6rem}
-.rag-items{display:flex;flex-direction:column;gap:0.4rem}
+.rag-title{font-size:0.72rem;color:var(--orange);font-weight:600;margin-bottom:0.8rem}
+.rag-items{display:flex;flex-direction:column;gap:0.9rem}
 .rag-item{
   display:flex;align-items:center;gap:8px;
   font-size:0.72rem;color:rgba(232,220,200,0.6);
 }
 .rag-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
 
-.how-steps{display:flex;flex-direction:column;gap:1.5rem}
+.how-steps{display:flex;flex-direction:column;gap:2rem}
 .how-step{
   display:flex;gap:1rem;
-  padding:1.2rem;
+  padding:1.4rem;
   background:var(--white);
   border:1px solid var(--border-light);
   border-radius:10px;
@@ -725,7 +742,11 @@ nav{
 }
 .integrity-inner{
   max-width:1100px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:stretch;
+}
+.integrity-points,
+.integrity-visual{
+  height:100%;
 }
 .integrity-points{display:flex;flex-direction:column;gap:1.2rem;margin-top:2rem}
 .int-point{
@@ -747,11 +768,11 @@ nav{
 }
 .integrity-visual .arabic-bg::before{opacity:0.1;font-size:2.5rem}
 .int-vis-label{font-size:0.65rem;color:var(--orange);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.2rem;position:relative;z-index:2}
-.int-flow{display:flex;flex-direction:column;gap:1rem;position:relative;z-index:2}
+.int-flow{display:flex;flex-direction:column;gap:1.5rem;position:relative;z-index:2}
 .int-step{
   background:rgba(255,255,255,0.06);
   border-radius:8px;
-  padding:0.8rem 1rem;
+  padding:1rem 1.2rem;
   display:flex;align-items:center;gap:10px;
 }
 .int-step-icon{
@@ -1069,7 +1090,7 @@ html[dir="rtl"] .tl-desc{
 <section id="hero">
   <div class="hero-left">
     <div class="hero-eyebrow"><span class="eyebrow-dot"></span> قيد التطوير الآن · كن أول من يعرف</div>
-    <div class="hero-title-en">دردش مع أعظم العقول، في أي وقت</div>
+    <div class="hero-title-en">دردش مع أعظم العقول،<wbr> في&nbsp;أي&nbsp;وقت</div>
     <p class="hero-sub">
       تبني ذاكرة نسخاً رقمية مدعومة بالذكاء الاصطناعي للمفكرين والمثقفين والقادة، محادثات صوتية حقيقية، أرشيف عميق ومعرفة موثوقة لجيل جديد.
     </p>
@@ -1176,12 +1197,12 @@ html[dir="rtl"] .tl-desc{
   <div class="problem-inner">
     <div class="reveal">
       <div class="section-eyebrow">المشكلة</div>
-      <h2 class="section-title">جل المعرفة حبيسة الأرشيف.</h2>
+      <h2 class="section-title">المعرفة حبيسة الأرشيف</h2>
       <p class="section-body">
         منصات الذكاء الاصطناعي للمرافقة التفاعلية غيرت بسرعة الطريقة التي يتعلّم بها الناس ويسألون ويتفاعلون مع الأفكار. لكن معظمها صُمم للتسلية، وجذب الانتباه، وانفصلت عن الشخصيات التي شكّلت أفكارها عالمنا.
       </p>
       <p class="section-body">
-        من ابن خلدون إلى نعوم تشومسكي، ومن طه حسين إلى عزمي بشارة، أهمّ حوارات الإنسانية تزداد صعوبة في الوصول إليها، لا سهولة.
+        من ابن خلدون إلى نعوم تشومسكي، ومن طه حسين إلى عزمي بشارة، أهمّ عقول الإنسانية تنعزل أكثر فأكثر.
       </p>
       <div class="stat-cards">
         <div class="stat-card">
